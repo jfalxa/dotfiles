@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#------------------------------------------------------------------------
+
+USED_RAM="$(awk '/MemTotal/ {memtotal=$2}; /MemAvailable/ {memavail=$2}; END { printf("%.0f", (100- (memavail / memtotal * 100))) }' /proc/meminfo)"
+FREE_RAM="$(awk '/MemTotal/ {memtotal=$2}; /MemAvailable/ {memavail=$2}; END { printf("%.0f", memavail / memtotal * 100) }' /proc/meminfo)"
+
+#------------------------------------------------------------------------
+
+echo "$USED_RAM%"
